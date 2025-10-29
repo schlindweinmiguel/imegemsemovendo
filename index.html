@@ -2,50 +2,59 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Movimento com JavaScript</title>
+    <title>Duas Imagens em Movimento</title>
 </head>
 <body>
 
-    <!-- Imagem que será movida -->
-    <img id="img" src="https://cdn.jd1noticias.com/img/social/780/467/dn_arquivo/2021/05/dinos-1110504.jpg" alt="Imagem">
+    <!-- Duas imagens -->
+    <img id="img1" src="https://www.deere.com.br/assets/images/region-3/products/tractors/medium/r3g002376_NK-trator-6m.png" alt="Imagem 1">
+    <img id="img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEwvSPaHpu5doXYwJMnGo5lkmrEa6koln6oQ&s" alt="Imagem 2">
 
     <script>
-        // Criar variáveis para a posição da imagem
-        let x = 0;
-        let y = 0;
-        let velX = 3;  // velocidade horizontal
-        let velY = 2;  // velocidade vertical
+        // === CONFIGURAÇÃO DAS IMAGENS ===
+        const img1 = document.getElementById("img1");
+        const img2 = document.getElementById("img2");
 
-        // Obter a imagem
-        const img = document.getElementById("img");
+        // Definir posição inicial e estilo via JavaScript
+        img1.style.position = "absolute";
+        img2.style.position = "absolute";
 
-        // Definir posição inicial da imagem via JavaScript
-        img.style.position = "absolute";
-        img.style.left = x + "px";
-        img.style.top = y + "px";
+        // Posições iniciais
+        let x1 = 50, y1 = 50;
+        let x2 = 300, y2 = 200;
 
-        // Função para mover a imagem
+        // Velocidades
+        let velX1 = 3, velY1 = 2;
+        let velX2 = -2, velY2 = 3;
+
+        // === FUNÇÃO DE MOVIMENTO ===
         function mover() {
-            x += velX;
-            y += velY;
+            // Atualizar posições
+            x1 += velX1;
+            y1 += velY1;
+            x2 += velX2;
+            y2 += velY2;
 
-            // Atualizar posição da imagem
-            img.style.left = x + "px";
-            img.style.top = y + "px";
+            // Atualizar posição visual
+            img1.style.left = x1 + "px";
+            img1.style.top = y1 + "px";
 
-            // Detectar bordas da janela e inverter direção
-            if (x + img.width >= window.innerWidth || x <= 0) {
-                velX = -velX;
-            }
-            if (y + img.height >= window.innerHeight || y <= 0) {
-                velY = -velY;
-            }
+            img2.style.left = x2 + "px";
+            img2.style.top = y2 + "px";
 
-            // Continuar a animação
+            // Verificar bordas da tela e inverter direção (img1)
+            if (x1 + img1.width >= window.innerWidth || x1 <= 0) velX1 = -velX1;
+            if (y1 + img1.height >= window.innerHeight || y1 <= 0) velY1 = -velY1;
+
+            // Verificar bordas da tela e inverter direção (img2)
+            if (x2 + img2.width >= window.innerWidth || x2 <= 0) velX2 = -velX2;
+            if (y2 + img2.height >= window.innerHeight || y2 <= 0) velY2 = -velY2;
+
+            // Continuar animação
             requestAnimationFrame(mover);
         }
 
-        // Iniciar movimento
+        // === INICIAR MOVIMENTO ===
         mover();
     </script>
 
