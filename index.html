@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Movimento com JavaScript</title>
+</head>
+<body>
+
+    <!-- Imagem que será movida -->
+    <img id="img" src="https://via.placeholder.com/100" alt="Imagem">
+
+    <script>
+        // Criar variáveis para a posição da imagem
+        let x = 0;
+        let y = 0;
+        let velX = 3;  // velocidade horizontal
+        let velY = 2;  // velocidade vertical
+
+        // Obter a imagem
+        const img = document.getElementById("img");
+
+        // Definir posição inicial da imagem via JavaScript
+        img.style.position = "absolute";
+        img.style.left = x + "px";
+        img.style.top = y + "px";
+
+        // Função para mover a imagem
+        function mover() {
+            x += velX;
+            y += velY;
+
+            // Atualizar posição da imagem
+            img.style.left = x + "px";
+            img.style.top = y + "px";
+
+            // Detectar bordas da janela e inverter direção
+            if (x + img.width >= window.innerWidth || x <= 0) {
+                velX = -velX;
+            }
+            if (y + img.height >= window.innerHeight || y <= 0) {
+                velY = -velY;
+            }
+
+            // Continuar a animação
+            requestAnimationFrame(mover);
+        }
+
+        // Iniciar movimento
+        mover();
+    </script>
+
+</body>
+</html>
